@@ -1,0 +1,5 @@
+First remove the picture: gsettings set org.gnome.desktop.background picture-uri ''
+
+Then apply RGB value, for example: gsettings set org.gnome.desktop.background primary-color 'rgb(66, 81, 100)'
+
+This will give it a nice blue/grey color, almost identical as we had it in Color options before they removed it.
