@@ -30,6 +30,10 @@ Plug '~/my-prototype-plugin'
 
 Plug 'https://github.com/rakr/vim-one'
 
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+Plug 'https://github.com/roxma/vim-tmux-clipboard'
+
 " Initialize plugin system
 call plug#end()
 
@@ -74,3 +78,8 @@ set softtabstop=2	" Sets the number of columns for a TAB
 set expandtab		" Expand TABs to spaces
 
 retab			" Convert Existing tab to spaces
+
+"use system clipboard
+set clipboard=unnamedplus
+
+
