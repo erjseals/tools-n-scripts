@@ -17,3 +17,9 @@ ssh-keygen -f ~/.ssh/<name_of_key>_id -t rsa -b 4096
 * Download and run VLC. In the "Media" menu, click "Convert" (or "Convert / Save", depending on your version). Paste the URL you've copied into the URL text field. Depending on your VLC version, this might be under the "Network" tab, or it might be right there as the "Source" text field.
 * Pick where to save your video under "Destination".
 * Click "Start" to start the download, after which the lecture will be available as a video on your computer.
+
+## Tar files
+
+### To compress 
+
+`tar -czvf name-of-archive.tar.gz /path/to/directory-or-file` 
