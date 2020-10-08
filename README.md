@@ -1,4 +1,4 @@
-# tools-n-scripts
+# tools-scripts
 
 This is the private repository for Eric Seals. This will be used to document helpful configurations for applications, for useful CLI sequences, or whatever.
 
