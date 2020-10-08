@@ -20,6 +20,18 @@ ssh-keygen -f ~/.ssh/<name_of_key>_id -t rsa -b 4096
 
 ## Tar files
 
-### To compress 
+To compress: 
 
 `tar -czvf name-of-archive.tar.gz /path/to/directory-or-file` 
+
+To extract:
+
+`tar -xzvf archive.tar.gz`
+
+For reference:
+
+* -c: Create an archive
+* -x: Extract an archive
+* -z: Compress the archive with gzip
+* -v: Verbose
+* -f: Specify filename of the archive
