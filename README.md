@@ -40,7 +40,7 @@ For reference:
 
 To use GDB:
 
-`$ gdb ./executablefile`
+`$ gdb ./executablefile -tui`
 `(gdb) r arg1 arg2 arg3`
 
 * breakpoint : b <filename>.c:<linenum>
@@ -50,5 +50,5 @@ To use GDB:
 * show all local : info locals
 * run/restart : r
 * disable breakpoints : disable
-
+* (In tui) switch through previously used commands : ctrl + p & ctrl + n
 
