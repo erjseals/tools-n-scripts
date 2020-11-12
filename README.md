@@ -35,3 +35,20 @@ For reference:
 * -z: Compress the archive with gzip
 * -v: Verbose
 * -f: Specify filename of the archive
+
+## GDB
+
+To use GDB:
+
+`$ gdb ./executablefile -tui`
+`(gdb) r arg1 arg2 arg3`
+
+* breakpoint : b <filename>.c:<linenum>
+* continue : c
+* next : n
+* print : p <variable>
+* show all local : info locals
+* run/restart : r
+* disable breakpoints : disable
+* (In tui) switch through previously used commands : ctrl + p & ctrl + n
+
