@@ -52,3 +52,19 @@ To use GDB:
 * disable breakpoints : disable
 * (In tui) switch through previously used commands : ctrl + p & ctrl + n
 
+## Windows / Linux Time Issue
+
+Force Linux to use local time:
+
+`timedatectl set-local-rtc 1 --adjust-system-clock`
+
+To check current settings, run:
+
+`timedatectl`
+
+If you see “RTC in local TZ: yes”, Linux is set to use the local time zone instead of UTC. The command warns you that this mode is not fully supported and can cause some problems when changing between time zones and with daylight savings time. However, this mode is probably better supported than the UTC option in Windows. If you dual-boot with Windows, Windows will handle daylight savings time for you.
+
+To undo the first command:
+
+`timedatectl set-local-rtc 0 --adjust-system-clock`
+
