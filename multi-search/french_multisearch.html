@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body style="background-color:grey">
+  <p>What French word would you like to multisearch? Type below, then press enter please.</p>
+  <input type="text" id="boxu" autofocus>
+  <script>
+    document.getElementById("boxu").onkeydown = function(e) {searchy(e)};
+    function searchy(e) 
+    {
+	    if (e.which == 13)
+	    {
+        var q = encodeURIComponent(document.getElementById("boxu").value);
+        window.open("https://en.wiktionary.org/wiki/" + q + "#French");
+        window.open("https://www.google.fr/search?tbm=isch&source=hp&biw=1920&bih=949&ei=-krIX7S4KtPWtQb3hLFA&q=" 
+          + q + "&oq=" + q + "&gs_lcp=CgNpbWcQAzIFCAAQsQMyBQgAELEDMgUIABCxAzIFCAAQsQMyAggAMgIIADICCAAyAggAMgIIADICCAA6CAgAELEDEIMBUIAHWPcLYLsNaABwAHgAgAFkiAHHA5IBAzQuMZgBAKABAaoBC2d3cy13aXotaW1n&sclient=img&ved=0ahUKEwi0nd_Q37DtAhVTa80KHXdCDAgQ4dUDCAc&uact=5")
+        window.open("http://fr.wiktionary.org/wiki/" + q);	 	 	 
+        document.getElementById("boxu").value = "";		
+	    }
+    }
+	</script>
+	</body>
+</html>
+
+	
