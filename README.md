@@ -68,3 +68,6 @@ To undo the first command:
 
 `timedatectl set-local-rtc 0 --adjust-system-clock`
 
+## Git grep search to include all directories/submodules
+
+`git grep -e "bar" --recurse-submodules`
