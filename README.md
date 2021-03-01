@@ -72,6 +72,10 @@ To undo the first command:
 
 `git grep -e "bar" --recurse-submodules`
 
+## Git checkout and update the submodules to where they were pointed by super-repo
+
+`git checkout $1; git submodule update --recursive`
+
 ## Latex and Vim (and with plugin VimTex)
 
 At the default, you start compilation processes with "\\ll". From here, :w will recompile the pdf - so use a document viewer that allows for live updates.
