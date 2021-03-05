@@ -76,6 +76,17 @@ To undo the first command:
 
 `git checkout $1; git submodule update --recursive`
 
+## Git search repo for commits modifying a string
+
+`git log -S <whatever> --source --all`
+
+To find all commits that added or removed the fixed string whatever. The --all parameter means to start from every branch and --source means to show which of those branches led to finding that commit. It's often useful to add -p to show the patches that each of those commits would introduce as well.
+
+You need to put quotes around the search term if it contains spaces or other special characters, for example:
+
+`git log -S 'hello world' --source --all`
+`git log -S "dude, where's my car?" --source --all`
+
 ## Latex and Vim (and with plugin VimTex)
 
 At the default, you start compilation processes with "\\ll". From here, :w will recompile the pdf - so use a document viewer that allows for live updates.
