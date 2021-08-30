@@ -8,7 +8,7 @@ For new systems:
 ```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
-
+For older/legacy:
 ```bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
