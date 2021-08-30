@@ -4,8 +4,13 @@ This is the private repository for Eric Seals. This will be used to document hel
 
 ## SSH key generation
 
+For new systems:
 ```bash
-ssh-keygen -f ~/.ssh/<name_of_key>_id -t rsa -b 4096 
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 
 ## Download videos from Blackboard
