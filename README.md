@@ -95,3 +95,114 @@ You need to put quotes around the search term if it contains spaces or other spe
 ## Latex and Vim (and with plugin VimTex)
 
 At the default, you start compilation processes with "\\ll". From here, :w will recompile the pdf - so use a document viewer that allows for live updates.
+
+## VMware Workstation fails to build kernel modules VMMON & VMNET
+
+Newer kernel versions have issues with building kernel modules VMMON and VMNET. This will/can occur with the 5.4.x kernel series that are included in the 20.04 Focal Fossa release. Below is a work-around for this issue derived from the great work being maintained by [Michael Kubecek](https://github.com/mkubecek). You will need to download the appropriate file based on what version you have installed, this example is based on 15.5.1
+
+Download the replacement files:
+
+`wget https://github.com/mkubecek/vmware-host-modules/archive/workstation-15.5.1.tar.gz`
+
+Extract the files:
+
+`tar -xzf workstation-15.5.1.tar.gz`
+
+cd into directory:
+
+`cd vmware-host-modules-workstation-15.5.1/`
+
+Create tar files of the modules:
+
+`tar -cf vmmon.tar vmmon-only`
+`tar -cf vmnet.tar vmnet-only`
+
+Copy files to /usr/lib/vmware.modules.source (elevated privileges needed):
+
+`sudo cp -v vmmon.tar vmnet.tar /usr/lib/vmware/modules/source/`
+
+Install modules (elevated privileges needed):
+
+`sudo vmware-modconfig --console --install-all`
+
+You should get an output similar to the following:
+
+```
+Stopping VMware services:
+   VMware Authentication Daemon                                        done
+   VM communication interface socket family                            done
+   Virtual machine communication interface                             done
+   Virtual machine monitor                                             done
+   Blocking file system                                                done
+make: Entering directory '/tmp/modconfig-ySDgLm/vmmon-only'
+Using kernel build system.
+/usr/bin/make -C /lib/modules/5.4.0-14-generic/build/include/.. M=$PWD SRCROOT=$PWD/. \
+  MODULEBUILDDIR= modules
+make[1]: Entering directory '/usr/src/linux-headers-5.4.0-14-generic'
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/linux/driver.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/linux/hostif.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/linux/driverLog.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/memtrack.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/apic.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/statVarsVmmon.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/vmx86.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/sharedAreaVmmon.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/cpuid.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/task.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/comport.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/common/phystrack.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/vmcore/moduleloop.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/bootstrap/monLoaderVmmon.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/bootstrap/monLoader.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/bootstrap/vmmblob.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/bootstrap/bootstrap.o
+  LD [M]  /tmp/modconfig-ySDgLm/vmmon-only/vmmon.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC [M]  /tmp/modconfig-ySDgLm/vmmon-only/vmmon.mod.o
+  LD [M]  /tmp/modconfig-ySDgLm/vmmon-only/vmmon.ko
+make[1]: Leaving directory '/usr/src/linux-headers-5.4.0-14-generic'
+/usr/bin/make -C $PWD SRCROOT=$PWD/. \
+  MODULEBUILDDIR= postbuild
+make[1]: Entering directory '/tmp/modconfig-ySDgLm/vmmon-only'
+make[1]: 'postbuild' is up to date.
+make[1]: Leaving directory '/tmp/modconfig-ySDgLm/vmmon-only'
+cp -f vmmon.ko ./../vmmon.o
+make: Leaving directory '/tmp/modconfig-ySDgLm/vmmon-only'
+make: Entering directory '/tmp/modconfig-ySDgLm/vmnet-only'
+Using kernel build system.
+/usr/bin/make -C /lib/modules/5.4.0-14-generic/build/include/.. M=$PWD SRCROOT=$PWD/. \
+  MODULEBUILDDIR= modules
+make[1]: Entering directory '/usr/src/linux-headers-5.4.0-14-generic'
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/driver.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/hub.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/userif.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/netif.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/bridge.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/procfs.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/smac_compat.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/smac.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/vnetEvent.o
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/vnetUserListener.o
+  LD [M]  /tmp/modconfig-ySDgLm/vmnet-only/vmnet.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC [M]  /tmp/modconfig-ySDgLm/vmnet-only/vmnet.mod.o
+  LD [M]  /tmp/modconfig-ySDgLm/vmnet-only/vmnet.ko
+make[1]: Leaving directory '/usr/src/linux-headers-5.4.0-14-generic'
+/usr/bin/make -C $PWD SRCROOT=$PWD/. \
+  MODULEBUILDDIR= postbuild
+make[1]: Entering directory '/tmp/modconfig-ySDgLm/vmnet-only'
+make[1]: 'postbuild' is up to date.
+make[1]: Leaving directory '/tmp/modconfig-ySDgLm/vmnet-only'
+cp -f vmnet.ko ./../vmnet.o
+make: Leaving directory '/tmp/modconfig-ySDgLm/vmnet-only'
+Starting VMware services:
+   Virtual machine monitor                                             done
+   Virtual machine communication interface                             done
+   VM communication interface socket family                            done
+   Blocking file system                                                done
+   Virtual ethernet                                                    done
+   VMware Authentication Daemon                                        done
+   Shared Memory Available                                             done
+```
