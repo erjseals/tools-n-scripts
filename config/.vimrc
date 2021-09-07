@@ -34,7 +34,10 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'https://github.com/roxma/vim-tmux-clipboard'
 
-" Plugin for tex
+" One theme
+Plug 'https://github.com/rakr/vim-one'
+
+" Vim Tex
 Plug 'lervag/vimtex'
 
 " Initialize plugin system
