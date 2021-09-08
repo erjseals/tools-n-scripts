@@ -73,6 +73,10 @@ To undo the first command:
 
 `timedatectl set-local-rtc 0 --adjust-system-clock`
 
+## Grep recursive search for a pattern in all *.c files
+
+`grep -lr --include='*.c' search_pattern .
+
 ## Git grep search to include all directories/submodules
 
 `git grep -e "bar" --recurse-submodules`
