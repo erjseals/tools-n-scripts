@@ -75,7 +75,7 @@ To undo the first command:
 
 ## Grep recursive search for a pattern in all *.c files
 
-`grep -lr --include='*.c' search_pattern .
+`grep -lr --include='*.c' search_pattern .`
 
 ## Git grep search to include all directories/submodules
 
