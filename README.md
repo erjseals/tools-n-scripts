@@ -57,6 +57,23 @@ To use GDB:
 * disable breakpoints : disable
 * (In tui) switch through previously used commands : ctrl + p & ctrl + n
 
+## External HDD Read-Only Issue
+
+Try executing the following command in a terminal:
+
+`sudo mount -o remount,uid=1000,gid=1000,rw /dev/sdc1`
+
+Explanation:
+
+* -o means "with these options".
+* remount - remounts the drive over the same mount point with the same previous options.
+* uid=1000 - this option makes the user with id 1000 the owner of the drive. If you have more than one username on your system, run the command id and use the number after uid=.
+* gid=1000 - this option makes the group with id 1000 the group owner of the drive. Same notes as previous point.
+* rw - this option mounts the drive as read/write. It was probably read/write anyways, but this is just to double check.
+* /dev/sdc1 is the name of the partition or device (can be checked in GParted in case you need to do the same with a different hardisk)
+
+[Credit](https://askubuntu.com/questions/333287/how-to-fix-external-hard-disk-read-only)
+
 ## Windows / Linux Time Issue
 
 Force Linux to use local time:
