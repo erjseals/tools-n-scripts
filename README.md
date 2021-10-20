@@ -57,6 +57,10 @@ To use GDB:
 * disable breakpoints : disable
 * (In tui) switch through previously used commands : ctrl + p & ctrl + n
 
+## Valgrind
+
+`valgrind --leak-check=full --track-origins=yes --verbose`
+
 ## External HDD Read-Only Issue
 
 Try executing the following command in a terminal:
