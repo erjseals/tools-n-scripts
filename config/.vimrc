@@ -88,3 +88,4 @@ retab               " Convert Existing tab to spaces
 "use system clipboard
 set clipboard=unnamedplus
 
+let g:netrw_liststyle = 1
