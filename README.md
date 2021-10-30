@@ -57,6 +57,14 @@ To use GDB:
 * disable breakpoints : disable
 * (In tui) switch through previously used commands : ctrl + p & ctrl + n
 
+## Vim netrw
+
+List of useful commands on netrw:
+
+* `R`: Renames a file 
+* `gh`: Toggles the hidden files
+* `I`: Changes display style (Vertical / Horizontal / Tree / ...)
+
 ## Valgrind
 
 `valgrind --leak-check=full --track-origins=yes --verbose`

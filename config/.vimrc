@@ -89,3 +89,5 @@ retab               " Convert Existing tab to spaces
 set clipboard=unnamedplus
 
 let g:netrw_liststyle = 1
+let g:netrw_banner    = 0
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
