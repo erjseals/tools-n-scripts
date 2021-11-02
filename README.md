@@ -129,6 +129,35 @@ You need to put quotes around the search term if it contains spaces or other spe
 
 At the default, you start compilation processes with "\\ll". From here, :w will recompile the pdf - so use a document viewer that allows for live updates.
 
+## Jetson SDK Manager doesn't like Ubuntu>18
+
+`sudo cp /usr/lib/os-release to /usr/lib/os-release-bionic`
+`sudo cp /usr/lib/os-release to /usr/lib/os-release-hisure`
+`sudo vim /usr/lib/os-release-bionic`
+
+```
+NAME="Ubuntu"
+VERSION="18.04.5 LTS (Bionic Beaver)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 18.04.5 LTS"
+VERSION_ID="18.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
+```
+
+When you want to start sdkmanager:
+
+`sudo cp  /usr/lib/os-release-bionic /usr/lib/os-release`
+`sdkmanager`
+
+When you are done:
+`sudo cp /usr/lib/os-release-hisure /usr/lib/os-release`
+
 ## VMware Workstation fails to build kernel modules VMMON & VMNET
 
 Newer kernel versions have issues with building kernel modules VMMON and VMNET. This will/can occur with the 5.4.x kernel series that are included in the 20.04 Focal Fossa release. Below is a work-around for this issue derived from the great work being maintained by [Michael Kubecek](https://github.com/mkubecek). You will need to download the appropriate file based on what version you have installed, this example is based on 15.5.1
