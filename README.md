@@ -48,7 +48,8 @@ To use GDB:
 `$ gdb ./executablefile -tui`
 `(gdb) r arg1 arg2 arg3`
 
-* breakpoint : b <filename>.c:<linenum>
+* breakpoint (line #)   : b <filename>.c:<linenum>
+* breakpoint (mem addr) : b \*0x12345678
 * continue : c
 * next : n
 * print : p <variable>
