@@ -31,7 +31,9 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
-## GDB
+## Debugging 
+
+### GDB
 
 To use GDB:
 
@@ -48,7 +50,13 @@ To use GDB:
 * disable breakpoints : disable
 * (In tui) switch through previously used commands : ctrl + p & ctrl + n
 
-## Vim netrw
+### Valgrind
+
+`valgrind --leak-check=full --track-origins=yes --verbose`
+
+## Vim
+
+### Vim netrw
 
 List of useful commands on netrw:
 
@@ -56,13 +64,9 @@ List of useful commands on netrw:
 * `gh`: Toggles the hidden files
 * `I`: Changes display style (Vertical / Horizontal / Tree / ...)
 
-## Latex and Vim (and with plugin VimTex)
+### Latex and Vim (and with plugin VimTex)
 
 At the default, you start compilation processes with "\\ll". From here, :w will recompile the pdf - so use a document viewer that allows for live updates.
-
-## Valgrind
-
-`valgrind --leak-check=full --track-origins=yes --verbose`
 
 ## (git) Grep
 
