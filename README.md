@@ -1,6 +1,6 @@
 # tools-scripts
 
-This is a scattered collection of things I've found useful to write down. Whether that be simple CLI commands I consistently forget, or just config files for applications like Vim and Tmux. This should probably be a private repository, but I don't want to log in to GitHub each time I forget how to unzip a tarball.
+This is a scattered collection of things I've found either useful to write down or save. Whether that be simple CLI commands I consistently forget, or config files for applications like Vim and Tmux. This should probably be a private repository, but I don't want to log in to GitHub each time I forget how to unzip a tarball.
 
 ## SSH and SCP
 
