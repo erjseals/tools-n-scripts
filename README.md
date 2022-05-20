@@ -40,6 +40,18 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
+## General Linux Things
+
+### Change default timeout of `sudo`
+
+Type `sudo visudo`. Look for the following line:
+
+`Defaults   env_reset`
+
+Change to the following, where X is the time you want to set in minutes.
+
+`Defaults   env_reset,timestamp_timeout=X`
+
 ## Debugging 
 
 ### GDB
@@ -173,33 +185,3 @@ When you are done:
 * Download and run VLC. In the "Media" menu, click "Convert" (or "Convert / Save", depending on your version). Paste the URL you've copied into the URL text field. Depending on your VLC version, this might be under the "Network" tab, or it might be right there as the "Source" text field.
 * Pick where to save your video under "Destination".
 * Click "Start" to start the download, after which the lecture will be available as a video on your computer.
-
-## VMware Workstation fails to build kernel modules VMMON & VMNET
-
-Newer kernel versions have issues with building kernel modules VMMON and VMNET. This will/can occur with the 5.4.x kernel series that are included in the 20.04 Focal Fossa release. Below is a work-around for this issue derived from the great work being maintained by [Michael Kubecek](https://github.com/mkubecek). You will need to download the appropriate file based on what version you have installed, this example is based on 15.5.1
-
-Download the replacement files:
-
-`wget https://github.com/mkubecek/vmware-host-modules/archive/workstation-15.5.1.tar.gz`
-
-Extract the files:
-
-`tar -xzf workstation-15.5.1.tar.gz`
-
-cd into directory:
-
-`cd vmware-host-modules-workstation-15.5.1/`
-
-Create tar files of the modules:
-
-`tar -cf vmmon.tar vmmon-only`
-`tar -cf vmnet.tar vmnet-only`
-
-Copy files to /usr/lib/vmware.modules.source (elevated privileges needed):
-
-`sudo cp -v vmmon.tar vmnet.tar /usr/lib/vmware/modules/source/`
-
-Install modules (elevated privileges needed):
-
-`sudo vmware-modconfig --console --install-all`
-
