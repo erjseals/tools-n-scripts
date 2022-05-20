@@ -44,7 +44,7 @@ For reference:
 
 ### Change default timeout of `sudo`
 
-Type `sudo visudo`. Look for the following line:
+Type `sudo visudo` in terminal. Look for the following line in the temp file:
 
 `Defaults   env_reset`
 
