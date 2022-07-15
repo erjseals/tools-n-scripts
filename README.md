@@ -91,13 +91,13 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 
 ## (git) Grep
 
-### Grep recursive search for a pattern in all *.c files
-
-`grep -lr --include='*.c' search_pattern .`
-
 ### Git grep search to include all directories/submodules
 
 `git grep -e "bar" --recurse-submodules`
+
+### Git grep search to include all directories/submodules, but only in .str files
+
+`git grep -e "bar" --recurse-submodules '*.str'`
 
 ### Git checkout and update the submodules to where they were pointed by super-repo
 
