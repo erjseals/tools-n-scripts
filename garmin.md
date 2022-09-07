@@ -1,7 +1,30 @@
 # GARMIN notes
 
-This is a scattered collection of things I've found either useful to write down or save. Should this be in multiple documents? Maybe - but I like giant files with ctl + f .
+This is a scattered (unordered) collection of things I've found either useful to write down or save. Should this be in multiple documents? Maybe - but I like giant files with ctl + f .
  
+
+## "malloc(): smallbin double linked list corrupted"
+
+This was confusing since I didn't understand how glibc could differentiate between a Segfault and a corrupted double-linked list, because according to my understanding,
+from the perspective of glibc they should look like the same thing. 
+
+Looking at malloc/malloc.c inside the glibc's code:
+
+```c
+1543 /* Take a chunk off a bin list */
+1544 #define unlink(P, BK, FD) {                                            \
+1545   FD = P->fd;                                                          \
+1546   BK = P->bk;                                                          \
+1547   if (__builtin_expect (FD->bk != P || BK->fd != P, 0))                \
+1548     malloc_printerr (check_action, "corrupted double-linked list", P); \
+1549   else {                                                               \
+1550     FD->bk = BK;                                                       \
+1551     BK->fd = FD;                                                       \
+```
+
+The reason glibc can know that this is a double-linked list is because the double-linked list in question is a part of glibc itself. Unfortunately, this means that 
+something completely unrelated probably corrupted those forward/back pointers - so good luck figuring out that heap corruption bud.
+
 ## VSCode Regex for removing certain lines in files
 
 We are finding / replacing the regex pattern with emptiness, so:
