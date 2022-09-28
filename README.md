@@ -89,6 +89,13 @@ List of useful commands on netrw:
 
 At the default, you start compilation processes with "\\ll". From here, :w will recompile the pdf - so use a document viewer that allows for live updates.
 
+### Multiline Edits
+
+1. Press `Ctrl` + `v` to enter into visual block mode.
+2. Use `j` or `k` to select multiple lines.
+3. Press `Shift` + `i` and start typing what you want.
+4. After pressing `Esc`, text will be inserted.
+
 ## (git) Grep
 
 ### Git grep search to include all directories/submodules
