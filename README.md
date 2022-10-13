@@ -7,30 +7,34 @@ This is a scattered collection of things I've found either useful to write down 
 ### SSH Key Generation
 
 For new systems:
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
+```shell
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 For older/legacy:
-```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```shell
+$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 
 ### SCP
 
 Copy a directory from remote to local:
-```bash
-scp -r <username>@<remote_ip>:<remote_directory_location> <local_target_location>
+```shell
+$ scp -r <username>@<remote_ip>:<remote_directory_location> <local_target_location>
 ```
 
 ## Tar files
 
 To compress: 
 
-`tar -czvf name-of-archive.tar.gz /path/to/directory-or-file` 
+```shell
+$ tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
+```
 
 To extract:
 
-`tar -xzvf archive.tar.gz`
+```shell
+$ tar -xzvf archive.tar.gz
+```
 
 For reference:
 
@@ -58,8 +62,10 @@ Change to the following, where X is the time you want to set in minutes.
 
 To use GDB:
 
-`$ gdb ./executablefile -tui`
-`(gdb) r arg1 arg2 arg3`
+```shell
+$ gdb ./executablefile -tui
+(gdb) r arg1 arg2 arg3
+```
 
 * breakpoint (line #)   : b <filename>.c:<linenum>
 * breakpoint (mem addr) : b \*0x12345678
@@ -73,7 +79,9 @@ To use GDB:
 
 ### Valgrind
 
-`valgrind --leak-check=full --track-origins=yes --verbose`
+```shell
+$ valgrind --leak-check=full --track-origins=yes --verbose
+```
 
 ## Vim
 
@@ -81,7 +89,7 @@ To use GDB:
 
 List of useful commands on netrw:
 
-* `R`: Renames a file 
+* `R`: Renames a file
 * `gh`: Toggles the hidden files
 * `I`: Changes display style (Vertical / Horizontal / Tree / ...)
 
@@ -101,7 +109,8 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 ### git [rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
 
 Modifying a specific commit in the history. For example, if you have a simple history like this:
-```
+
+```shell
 abcde73f (HEAD -> master) Most recent commit
 gh2ijk4l Add changes to README.md
 bbc643cd Rename variable
@@ -109,7 +118,9 @@ st58uvwx init README.md
 ```
 But you actually renamed the variable incorrectly, and you want to add that fix to *that* specific commit while keeping the history the same (the SHAs will change)... Use rebase! [Here's what you do](https://stackoverflow.com/questions/1186535/how-do-i-modify-a-specific-commit):
 
-`$ git rebase --interactive 'bbc643cd^'
+```shell
+$ git rebase --interactive 'bbc643cd^'
+```
 
 Please note the caret ^ at the end of the command, because you need actually to rebase back to the commit before the one you wish to modify.
 
@@ -119,14 +130,18 @@ Save the file and exit. git will interpret and automatically execute the command
 
 At this point, `bbc643cd` is your last commit and you can easily amend it. Make your changes and then commit them with the command:
 
-`$ git commit --all --amend --no-edit`
+```shell
+$ git commit --all --amend --no-edit
+```
 
 After that, return back to the previous HEAD commit using:
 
-`$ git rebase --continue`
+```shell
+$ git rebase --continue
+```
 
 **WARNING**: Note that this will change the SHA-1 of that commit **as well as all children** - in other words, this rewrites the history from that point forward. You can break repos doing this if you push using the command `git push --force`. The new history will look something like this (observe the new SHAs):
-```
+```shell
 yzj4l634 (HEAD -> master) Most recent commit
 f9sd0aj4 Add changes to README.md
 234l63n6 Rename variable
@@ -135,7 +150,7 @@ st58uvwx init README.md
 ### git stash
 
 Say you're doing the above rebase process. You're at the head with some changes you want to apply to a previous patch, but calling `git rebase --interactive '<SHA>^'` is going to say:
-```
+```shell
 $ git rebase --interactive 'bbc643cd^'
 error: cannot rebase: You have unstaged changes.
 error: Please commit or stash them.
@@ -146,41 +161,70 @@ For the most part, git will tell you what to do about changes. For example, your
 
 [Here's how to cherry-pick without pulling in the commit message](https://stackoverflow.com/questions/32333383/git-cherry-pick-to-working-copy-without-commit):
 
-`$ git cherry-pick -n <HASH>`
+```shell
+$ git cherry-pick -n <HASH>
+```
 
 To then unstage the staged changes:
 
-`$ git reset`
+```shell
+$ git reset
+```
 ## (git) Grep
+
+### Regex with git grep
+
+Documentation for [git grep](https://git-scm.com/docs/git-grep) and specifically the style of regexp being used - that is [PCRE regex syntax](https://www.pcre.org/). Relevant and [useful stackoverflow](https://stackoverflow.com/questions/71144399/how-can-i-use-git-grep-with-regular-expressions).
+
+```shell
+$ git grep --recurse-submodules -P 'DBG_[AEIDW]\( [a-zA-Z_ %,?."]+\);'
+```
+
+Find DBG logs with elvis operator
+
+```shell
+$ git grep --recurse-submodules -P 'DBG_[AEIDW]\([a-zA-Z_" %,.#]+\?[a-zA-Z_" %,.#:]+\);'
+```
 
 ### Git grep search to include all directories/submodules
 
-`git grep -e "bar" --recurse-submodules`
+```shell
+$ git grep -e "bar" --recurse-submodules
+```
 
 ### Git grep search to include all directories/submodules, but only in .str files
 
-`git grep -e "bar" --recurse-submodules '*.str'`
-
+```shell
+$ git grep -e "bar" --recurse-submodules '*.str'
+```
 ### Git checkout and update the submodules to where they were pointed by super-repo
 
-`git checkout $1; git submodule update --recursive`
+```shell
+$ git checkout $1; git submodule update --recursive
+```
 
 ### Git search repo for commits modifying a string
 
-`git log -S <whatever> --source --all`
+```shell
+$ git log -S <whatever> --source --all
+```
 
 To find all commits that added or removed the fixed string whatever. The `--all` parameter means to start from every branch and `--source` means to show which of those branches led to finding that commit. It's often useful to add `-p` to show the patches that each of those commits would introduce as well.
 
 You need to put quotes around the search term if it contains spaces or other special characters, for example:
 
-`git log -S 'hello world' --source --all`
-`git log -S "dude, where's my car?" --source --all`
+```shell
+$ git log -S 'hello world' --source --all
+$ git log -S "dude, where's my car?" --source --all
+```
 
 ## External HDD Read-Only Issue
 
 Try executing the following command in a terminal:
 
-`sudo mount -o remount,uid=1000,gid=1000,rw /dev/sdc1`
+```shell
+$ sudo mount -o remount,uid=1000,gid=1000,rw /dev/sdc1
+```
 
 Explanation:
 
@@ -197,23 +241,31 @@ Explanation:
 
 Force Linux to use local time:
 
-`timedatectl set-local-rtc 1 --adjust-system-clock`
+```shell
+$ timedatectl set-local-rtc 1 --adjust-system-clock
+```
 
 To check current settings, run:
 
-`timedatectl`
+```shell
+$ timedatectl
+```
 
 If you see “RTC in local TZ: yes”, Linux is set to use the local time zone instead of UTC. The command warns you that this mode is not fully supported and can cause some problems when changing between time zones and with daylight savings time. However, this mode is probably better supported than the UTC option in Windows. If you dual-boot with Windows, Windows will handle daylight savings time for you.
 
 To undo the first command:
 
-`timedatectl set-local-rtc 0 --adjust-system-clock`
+```shell
+$ timedatectl set-local-rtc 0 --adjust-system-clock
+```
 
 ## Jetson SDK Manager doesn't like Ubuntu>18
 
-`sudo cp /usr/lib/os-release to /usr/lib/os-release-bionic`
-`sudo cp /usr/lib/os-release to /usr/lib/os-release-hisure`
-`sudo vim /usr/lib/os-release-bionic`
+```shell
+$ sudo cp /usr/lib/os-release to /usr/lib/os-release-bionic
+$ sudo cp /usr/lib/os-release to /usr/lib/os-release-hisure
+$ sudo vim /usr/lib/os-release-bionic
+```
 
 ```
 NAME="Ubuntu"
@@ -232,11 +284,15 @@ UBUNTU_CODENAME=bionic
 
 When you want to start sdkmanager:
 
-`sudo cp  /usr/lib/os-release-bionic /usr/lib/os-release`
-`sdkmanager`
+```shell
+$ sudo cp  /usr/lib/os-release-bionic /usr/lib/os-release
+$ sdkmanager
+```
 
 When you are done:
-`sudo cp /usr/lib/os-release-hisure /usr/lib/os-release`
+```shell
+$ sudo cp /usr/lib/os-release-hisure /usr/lib/os-release
+```
 
 ## Download videos from Blackboard
 
