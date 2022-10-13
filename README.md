@@ -96,6 +96,61 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 3. Press `Shift` + `i` and start typing what you want.
 4. After pressing `Esc`, text will be inserted.
 
+## git
+
+### git [rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
+
+Modifying a specific commit in the history. For example, if you have a simple history like this:
+```
+abcde73f (HEAD -> master) Most recent commit
+gh2ijk4l Add changes to README.md
+bbc643cd Rename variable
+st58uvwx init README.md
+```
+But you actually renamed the variable incorrectly, and you want to add that fix to *that* specific commit while keeping the history the same (the SHAs will change)... Use rebase! [Here's what you do](https://stackoverflow.com/questions/1186535/how-do-i-modify-a-specific-commit):
+
+`$ git rebase --interactive 'bbc643cd^'
+
+Please note the caret ^ at the end of the command, because you need actually to rebase back to the commit before the one you wish to modify.
+
+In the default editor, modify `pick` to `edit` in the line mentioning `bbc643cd`.
+
+Save the file and exit. git will interpret and automatically execute the commands in the file. You will find yourself in the previous situation in which you just had created commit `bbc643cd`.
+
+At this point, `bbc643cd` is your last commit and you can easily amend it. Make your changes and then commit them with the command:
+
+`$ git commit --all --amend --no-edit`
+
+After that, return back to the previous HEAD commit using:
+
+`$ git rebase --continue`
+
+**WARNING**: Note that this will change the SHA-1 of that commit **as well as all children** - in other words, this rewrites the history from that point forward. You can break repos doing this if you push using the command `git push --force`. The new history will look something like this (observe the new SHAs):
+```
+yzj4l634 (HEAD -> master) Most recent commit
+f9sd0aj4 Add changes to README.md
+234l63n6 Rename variable
+st58uvwx init README.md
+```
+### git stash
+
+Say you're doing the above rebase process. You're at the head with some changes you want to apply to a previous patch, but calling `git rebase --interactive '<SHA>^'` is going to say:
+```
+$ git rebase --interactive 'bbc643cd^'
+error: cannot rebase: You have unstaged changes.
+error: Please commit or stash them.
+```
+For the most part, git will tell you what to do about changes. For example, your error message said to `git stash` your changes. This would be if you wanted to keep them. After pulling, you would then do `git stash pop` and your changes would be reapplied.
+
+### git [cherry-pick](https://git-scm.com/docs/git-cherry-pick)
+
+[Here's how to cherry-pick without pulling in the commit message](https://stackoverflow.com/questions/32333383/git-cherry-pick-to-working-copy-without-commit):
+
+`$ git cherry-pick -n <HASH>`
+
+To then unstage the staged changes:
+
+`$ git reset`
 ## (git) Grep
 
 ### Git grep search to include all directories/submodules
