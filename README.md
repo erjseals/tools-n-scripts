@@ -24,7 +24,7 @@ $ scp -r <username>@<remote_ip>:<remote_directory_location> <local_target_locati
 
 ## Tar files
 
-To compress: 
+To compress:
 
 ```shell
 $ tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
@@ -157,6 +157,18 @@ error: Please commit or stash them.
 ```
 For the most part, git will tell you what to do about changes. For example, your error message said to `git stash` your changes. This would be if you wanted to keep them. After pulling, you would then do `git stash pop` and your changes would be reapplied.
 
+You can also see the list of stashes within the stash by:
+```shell
+$ git stash list
+```
+and see the actual files with:
+```shell
+$ git stash show
+```
+Instead of popping everything, you can individually checkout a specific file from the stash with:
+```shell
+$ git checkout stash@{0} -- <filename>
+```
 ### git [cherry-pick](https://git-scm.com/docs/git-cherry-pick)
 
 [Here's how to cherry-pick without pulling in the commit message](https://stackoverflow.com/questions/32333383/git-cherry-pick-to-working-copy-without-commit):
