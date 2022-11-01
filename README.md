@@ -44,6 +44,24 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
+## Double click *.zip file to "Extract Here" instead of just opening 7zip
+
+[Source](https://sourceforge.net/p/sevenzip/discussion/45797/thread/d8d4d8bccd/)
+
+This assumes that 7zip is set to be the default zip handler. First, open the registry editor and navigate to:
+
+`HKEY_CLASSES_ROOT\7-Zip.zip\shell\open\command`
+
+The current (Default) value should be `"C:\Program Files\7-Zip\7zFM.exe" "%1"`. Double-click on this and copy the string to the clipboard.
+
+Create a new key under `HKEY_CLASSES_ROOT\7-Zip.zip\shell` so that new key is a sibling to "open". The new key can be named something like `extract_to`. Next, create a subkey under `extract_to` and name it `command`. Now double-click on the (Default) string value of this `command` key and paste `"C:\Program Files\7-Zip\7z.exe" x "%1" -o*` (including quotes) and click OK.
+
+Double-click on the (Default) string value of `HKEY_CLASSES_ROOT\7-Zip.zip\shell`, pasting `extract_to` or whatever name you gave the new key in the last step. This string will also appear on the context menu if you right-click a zip.
+
+To get 7zip to do something instead of extracting into a directory, you just need to modify what you paste. [All possible args can be found here](https://info.nrao.edu/computing/guide/file-access-and-archiving/7zip/7z-7za-command-line-guide). For example, the "Extract Here" functionality is set by pasting `"C:\Program Files\7-Zip\7z.exe" x "%1"`.
+
+If you don't want to set this for all users, you can instead make the changes at the user level with `HKEY_CURRENT_USER\SOFTWARE\Classes\7-Zip.zip\shell` which is probably better anyway.
+
 ## General Linux Things
 
 ### Change default timeout of `sudo`
