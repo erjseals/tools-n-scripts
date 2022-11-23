@@ -44,6 +44,47 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
+## Get permalink to a line on Github
+
+Don't just link to the line numbers! Be sure to use the [canonical URL](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files) too. Otherwise when that file is updated, you'll have a URL that points to the wrong lines!
+
+### How to make a permanent link to the right lines:
+
+Click on the line number you want (like line 31), and the URL in your browser will get a #L31 tacked onto the end. You literally click on the 31 at the left side, not the line of code. Looks like this:
+
+![line 31](./res/Line31.PNG)
+
+And now your browser's URL looks like this:
+
+```
+https://github.com/erjseals/tools-scripts/blob/master/config/.tmux.conf#L31
+```
+
+If you want multiple lines selected, simply hold down the Shift key and click a second line number, like line 35. Looks like this:
+
+![line 31-35](./res/Line31-35.PNG)
+
+And now your browser's URL looks like this:
+
+```
+https://github.com/erjseals/tools-scripts/blob/master/config/.tmux.conf#L31-35
+```
+
+### Here's the important part:
+
+Now get the canonical URL for that particular commit by pressing the `Y` key. The URL in your browser will change to become something like this:
+
+```
+https://github.com/erjseals/tools-scripts/blob/725f8bf054ed3b8e3ffd87da639e7fa1dda50044/config/.tmux.conf#L31-L35
+```
+
+That link contains the actual [SHA-1](https://en.wikipedia.org/wiki/SHA-1) hash for that particular commit, rather than the current version of the file on `master`. That means that this link will work forever and not point to lines 31-35 of whatever future version of that file might contain.
+
+GitHub has now made it easier to get the permanent link by providing a `...` menu on the left after you select one or more lines.
+
+![Context Menu for line 31-35](./res/ContextMenu_Line31-35.PNG)
+
+
 ## Double click *.zip file to "Extract Here" instead of just opening 7zip
 
 [Source](https://sourceforge.net/p/sevenzip/discussion/45797/thread/d8d4d8bccd/)
