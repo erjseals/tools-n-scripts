@@ -124,6 +124,18 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 
 ## git
 
+### Various git commands
+
+Show `git diff` for the files in the staging area:
+```shell
+$ git diff --staged
+```
+
+Reset a specific file (for the example file 'my-file.txt'):
+```shell
+$ git checkout HEAD -- my-file.txt
+```
+
 ### git [rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
 
 Modifying a specific commit in the history. For example, if you have a simple history like this:
@@ -134,7 +146,7 @@ gh2ijk4l Add changes to README.md
 bbc643cd Rename variable
 st58uvwx init README.md
 ```
-But you actually renamed the variable incorrectly, and you want to add that fix to *that* specific commit while keeping the history the same (the SHAs will change)... Use rebase! [Here's what you do](https://stackoverflow.com/questions/1186535/how-do-i-modify-a-specific-commit):
+But you actually renamed the variable incorrectly (in the commit bbc643cd "Rename variable"), and you want to add that fix to *that* specific commit while keeping the history the same (the SHAs will change)... Use rebase! [Here's what you do](https://stackoverflow.com/questions/1186535/how-do-i-modify-a-specific-commit):
 
 ```shell
 $ git rebase --interactive 'bbc643cd^'
