@@ -1,7 +1,0 @@
-additem('Autogen Armor')
-
-additem('Autogen Gloves')
-
-additem('Autogen Pants')
-
-additem('Autogen Boots')
