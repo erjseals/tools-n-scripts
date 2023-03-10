@@ -44,6 +44,29 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
+## Shell Scripts
+
+### Prompt to continue
+[Taken from here.](https://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script) One way:
+```shell
+read -p "Are you sure? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    # do dangerous stuff
+fi
+```
+The inverse:
+```shell
+read -p "Are you sure? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+fi
+# does dangerous stuff (if it gets here)
+```
+
 ## Get permalink to a line on Github
 
 Don't just link to the line numbers! Be sure to use the [canonical URL](https://docs.github.com/en/repositories/working-with-files/using-files/getting-permanent-links-to-files) too. Otherwise when that file is updated, you'll have a URL that points to the wrong lines!
