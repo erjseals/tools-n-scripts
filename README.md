@@ -190,6 +190,25 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 
 ### Various git commands
 
+Log, one line per commit, the n number of files which touched a specific line of a specific file (line 42 in this example):
+```shell
+$ git log --no-patch --pretty=format:"%h %s (%an)" -L 42,42:example.py -n 5
+641f31d9ca Summary for a patch that changed line 42 (Eric Seals)
+641fasdgfs Summary for a patch that changed line 42 (Eric Seals)
+aay546f9ct Summary for a patch that changed line 42 (Eric Seals)
+641e7r75pp Summary for a patch that changed line 42 (Eric Seals)
+35fghgdrnf Summary for a patch that changed line 42 (Eric Seals)
+```
+You can also specify a range, so say I wanted to see all changes on lines 42-100:
+```shell
+$ git log --no-patch --pretty=format:"%h %s (%an)" -L 42,100:example.py -n 5
+641f31d9ca Summary for a patch that changed line 42 (Eric Seals)
+641fasdgfs Summary for a patch that changed line 57 (Eric Seals)
+aay546f9ct Summary for a patch that changed line 96 (Eric Seals)
+641e7r75pp Summary for a patch that changed line 47 (Eric Seals)
+35fghgdrnf Summary for a patch that changed line 77 (Eric Seals)
+```
+
 Show `git diff` for the files in the staging area:
 ```shell
 $ git diff --staged
