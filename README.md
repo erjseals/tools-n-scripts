@@ -44,6 +44,13 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
+## Bash Tricks
+
+Change forward slashes to back slashes. The following will have `D:/test/directory/structure` copied to the clipboard.
+```shell
+$ echo 'D:\test\directory\structure' | tr '\\' '/' | clip
+```
+
 ## Shell Scripts
 
 ### Prompt to continue
