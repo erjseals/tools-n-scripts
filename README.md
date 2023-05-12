@@ -197,6 +197,27 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 
 ### Various git commands
 
+Note that `Manifest.xml` and the c++ class `WindowManager` are just examples I'm using.
+
+Show all files changed in a commit:
+```shell
+$ git diff-tree --no-commit-id --name-only HEAD^ -r
+Manifest.xml
+WindowManager.cpp
+WindowManager.hpp
+```
+
+Show what changed in a specific file between two different commits:
+```shell
+$ git diff HEAD^ HEAD WindowManager.cpp
+** git diff here from previous HEAD to current HEAD **
+```
+
+Say you accidentally committed a file, here's how to remove that from most recent commit and have it moved to the staging area (so you could add it to a different commit):
+```shell
+$ git reset HEAD^ -- WindowManager.cpp
+```
+
 Log, one line per commit, the n number of files which touched a specific line of a specific file (line 42 in this example):
 ```shell
 $ git log --no-patch --pretty=format:"%h %s (%an)" -L 42,42:example.py -n 5
