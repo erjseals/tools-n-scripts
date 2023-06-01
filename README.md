@@ -195,11 +195,36 @@ At the default, you start compilation processes with "\\ll". From here, :w will 
 
 ## git
 
-### Various git commands
+### Rebase up to a specific SHA:
 
-Note that `Manifest.xml` and the c++ class `WindowManager` are just examples I'm using.
+Say you have a history like this:
 
-Show all files changed in a commit:
+```
+A --- B --- C          master
+ \
+  \-- D                topic
+```
+and would like to move towards
+```
+A --- B --- C          master
+       \
+        \-- D          topic
+```
+instead of the following (this would be the result of `git pull --rebase`)
+```
+A --- B --- C          master
+             \
+              \-- D    topic
+```
+This can be done with the following four commands:
+```shell
+git branch temp master^
+git checkout topic
+git rebase temp
+git branch -d temp
+```
+
+### Show all files changed in a commit:
 ```shell
 $ git diff-tree --no-commit-id --name-only HEAD^ -r
 Manifest.xml
@@ -207,17 +232,19 @@ WindowManager.cpp
 WindowManager.hpp
 ```
 
-Show what changed in a specific file between two different commits:
+### Show what changed in a specific file between two different commits:
 ```shell
 $ git diff HEAD^ HEAD WindowManager.cpp
 ** git diff here from previous HEAD to current HEAD **
 ```
 
+### Pull out a change from the most recent commit
 Say you accidentally committed a file, here's how to remove that from most recent commit and have it moved to the staging area (so you could add it to a different commit):
 ```shell
 $ git reset HEAD^ -- WindowManager.cpp
 ```
 
+### Git log
 Log, one line per commit, the n number of files which touched a specific line of a specific file (line 42 in this example):
 ```shell
 $ git log --no-patch --pretty=format:"%h %s (%an)" -L 42,42:example.py -n 5
@@ -237,12 +264,12 @@ aay546f9ct Summary for a patch that changed line 96 (Eric Seals)
 35fghgdrnf Summary for a patch that changed line 77 (Eric Seals)
 ```
 
-Show `git diff` for the files in the staging area:
+### Show git diff for the files in the staging area:
 ```shell
 $ git diff --staged
 ```
 
-Reset a specific file (for the example file 'my-file.txt'):
+### Reset a specific file (for the example file 'my-file.txt'):
 ```shell
 $ git checkout HEAD -- my-file.txt
 ```
