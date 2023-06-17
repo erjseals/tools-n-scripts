@@ -1,4 +1,0 @@
-Host c2
-  HostName cycle2.eecs.ku.edu
-  User e559s777
-  IdentityFile /home/erjseals/.ssh/ku_id
