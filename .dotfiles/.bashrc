@@ -115,3 +115,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+bind -x '"\C-f": /home/erjseals/.local/bin/tmux-sessionizer'
+
