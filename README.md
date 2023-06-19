@@ -44,6 +44,22 @@ For reference:
 * -v: Verbose
 * -f: Specify filename of the archive
 
+## Manually shrink WSL size
+There's a known bug that, while WSL can automatically increase its size, reducing size must be done manually.
+[Stack Overflow](https://superuser.com/questions/1606213/how-do-i-get-back-unused-disk-space-from-ubuntu-on-wsl2) and [Github Comment](https://github.com/microsoft/WSL/issues/4699)
+
+Here's what to do:
+```shell
+wsl --shutdown
+diskpart
+# open window Diskpart
+select vdisk file="C:\WSL-Distros\…\ext4.vhdx"
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit
+```
+
 ## Bash Tricks
 
 Change forward slashes to back slashes. The following will have `D:/test/directory/structure` copied to the clipboard.
