@@ -49,6 +49,26 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# Re-enable Fn birghtness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+# The following file may need to be created for the above to work correctly
+# /etc/X11/xorg.conf
+
+# Section "Device"
+#     Identifier  "Intel Graphics"
+#     Driver      "intel"
+#     Option      "Backlight"  "intel_backlight"
+# EndSection
+
+# Where the "intel_backlight comes from  /sys/class/backlight/intel_backlight
+# For posterity, backlight value can also be directly manipulated as follows:
+# echo 468 | sudo tee /sys/class/backlight/intel_backlight/brightness
+# The max brightness can be seen with:
+# cat /sys/class/backlight/intel_backlight/max_brightness
+# And current brightness with:
+# cat /sys/class/backlight/intel_backlight/brightness
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -199,5 +219,5 @@ exec --no-startup-id picom -CGb
 exec --no-startup-id feh --bg-scale /home/erjseals/Pictures/1920x1080/207679.jpg
 
 # Start discord on workspace 10
-assign [class="discord"] $ws10
-exec --no-startup-id discord
+# assign [class="discord"] $ws10
+# exec --no-startup-id discord
